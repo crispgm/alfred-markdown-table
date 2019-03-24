@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.crispgm.alfred_markdown_table</string>
+	<key>category</key>
+	<string>Tools</string>
+	<key>connections</key>
+	<dict>
+		<key>31EAC267-55AE-43CD-8692-44A7AD492B91</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>11F5050D-2EDF-47B4-AAE8-B5E86233F618</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>David Zhang</string>
+	<key>description</key>
+	<string>com.crispgm.alfred_markdown_table</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Alfred Markdown Table</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>table</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Generating...</string>
+				<key>script</key>
+				<string>./alfred-markdown-table "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Cols, Rows, Row Width</string>
+				<key>title</key>
+				<string>Input markdown table size</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>31EAC267-55AE-43CD-8692-44A7AD492B91</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>11F5050D-2EDF-47B4-AAE8-B5E86233F618</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Generate Markdown Table with Alfred Workflow.</string>
+	<key>uidata</key>
+	<dict>
+		<key>11F5050D-2EDF-47B4-AAE8-B5E86233F618</key>
+		<dict>
+			<key>xpos</key>
+			<integer>460</integer>
+			<key>ypos</key>
+			<integer>220</integer>
+		</dict>
+		<key>31EAC267-55AE-43CD-8692-44A7AD492B91</key>
+		<dict>
+			<key>xpos</key>
+			<integer>220</integer>
+			<key>ypos</key>
+			<integer>220</integer>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string>https://github.com/crispgm/alfred-markdown-table</string>
+</dict>
+</plist>
