@@ -57,11 +57,11 @@ func buildTable() string {
 
 	table := tablewriter.NewWriter(buf)
 	placeholder := make([]string, colNum)
-	table.SetHeader()
+	table.SetHeader(placeholder)
 	table.SetBorders(tablewriter.Border{Left: true, Top: false, Right: true, Bottom: false})
 	table.SetCenterSeparator("|")
 	for idx := 0; idx < rowNum; idx++ {
-		table.Append()
+		table.Append(placeholder)
 	}
 	table.Render()
 
