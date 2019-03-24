@@ -2,8 +2,10 @@ package main
 
 import (
 	"bytes"
+	"fmt"
 	"os"
 	"strconv"
+	"strings"
 
 	"github.com/deanishe/awgo"
 	"github.com/olekukonko/tablewriter"
@@ -12,15 +14,13 @@ import (
 var (
 	wf *aw.Workflow
 
-	colNum   int
-	rowNum   int
-	rowWidth int
+	colNum int
+	rowNum int
 )
 
 func initDefaults() {
 	colNum = 2
 	rowNum = 2
-	rowWidth = 6
 }
 
 func run() {
@@ -29,25 +29,28 @@ func run() {
 		return
 	}
 	if argc > 1 {
-		val, err := strconv.Atoi(os.Args[1])
-		if err != nil {
-			colNum = val
+		params := os.Args[1]
+		realArgs := strings.Split(params, " ")
+		count := 0
+		for _, arg := range realArgs {
+			if arg == "" || arg == " " {
+				continue
+			}
+			val, err := strconv.Atoi(arg)
+			if err != nil {
+				break
+			}
+			if count == 0 {
+				colNum = val
+			} else if count == 1 {
+				rowNum = val
+			} else {
+				break
+			}
+			count++
 		}
 	}
-	if argc > 2 {
-		val, err := strconv.Atoi(os.Args[2])
-		if err != nil {
-			rowNum = val
-		}
-	}
-	if argc > 3 {
-		val, err := strconv.Atoi(os.Args[3])
-		if err != nil {
-			rowWidth = val
-		}
-	}
-	wf.NewItem("Generate a 2x2 table")
-	wf.NewItem("Generate a 2x2 table with 3-width placeholder")
+	wf.NewItem(fmt.Sprintf("Generate a %dx%d table", colNum, rowNum)).Arg(buildTable()).Valid(true)
 	wf.SendFeedback()
 	return
 }
