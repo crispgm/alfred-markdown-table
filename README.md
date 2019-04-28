@@ -2,11 +2,13 @@
 
 Generate Markdown Table with Alfred Workflow.
 
+![screenshot](/screenshot.png)
+
 ## Installation
 
 ### Install via Packal
 
-Coming soon.
+[Alfred Markdown Table](http://www.packal.org/workflow/alfred-markdown-table)
 
 ### Install manually
 
