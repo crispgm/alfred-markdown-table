@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/deanishe/awgo"
+	aw "github.com/deanishe/awgo"
 	"github.com/olekukonko/tablewriter"
 )
 
@@ -60,6 +60,9 @@ func buildTable() string {
 
 	table := tablewriter.NewWriter(buf)
 	placeholder := make([]string, colNum)
+	for index := range placeholder {
+		placeholder[index] = " "
+	}
 	table.SetHeader(placeholder)
 	table.SetBorders(tablewriter.Border{Left: true, Top: false, Right: true, Bottom: false})
 	table.SetCenterSeparator("|")
