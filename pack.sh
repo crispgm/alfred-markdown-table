@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 go build
 zip alfred-markdown-table.alfredworkflow ./alfred-markdown-table ./info.plist ./icon.png
