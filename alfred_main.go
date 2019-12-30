@@ -7,23 +7,21 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/crispgm/alfred-markdown-table/pkg/namesgenerator"
 	aw "github.com/deanishe/awgo"
 	"github.com/olekukonko/tablewriter"
 )
 
 var (
 	wf *aw.Workflow
-
-	colNum int
-	rowNum int
 )
 
-func initDefaults() {
-	colNum = 2
-	rowNum = 2
-}
-
 func run() {
+	var (
+		colNum   int = 2
+		rowNum   int = 2
+		testData bool
+	)
 	argc := len(os.Args)
 	if argc == 1 {
 		return
@@ -37,47 +35,64 @@ func run() {
 				continue
 			}
 			val, err := strconv.Atoi(arg)
-			if err != nil {
-				break
-			}
-			if count == 0 {
-				colNum = val
-			} else if count == 1 {
-				rowNum = val
+			if err == nil {
+				if count == 0 {
+					colNum = val
+				} else if count == 1 {
+					rowNum = val
+				}
+			} else if count == 2 && (arg == "data" || arg == "test") {
+				testData = true
 			} else {
 				break
 			}
 			count++
 		}
 	}
-	wf.NewItem(fmt.Sprintf("Generate a %dx%d table", colNum, rowNum)).Arg(buildTable()).Valid(true)
+	wf.NewItem(getSubtitle(colNum, rowNum, testData)).
+		Arg(buildTable(colNum, rowNum, testData)).
+		Valid(true)
 	wf.SendFeedback()
 	return
 }
 
-func buildTable() string {
+func getSubtitle(colNum, rowNum int, testData bool) string {
+	subtitle := fmt.Sprintf("Generate a %dx%d table", colNum, rowNum)
+	if testData {
+		subtitle += " with test data"
+	}
+	return subtitle
+}
+
+func buildTable(colNum, rowNum int, testData bool) string {
 	buf := new(bytes.Buffer)
 
 	table := tablewriter.NewWriter(buf)
-	placeholder := make([]string, colNum)
-	for index := range placeholder {
-		placeholder[index] = " "
-	}
-	table.SetHeader(placeholder)
+
+	table.SetHeader(generateRow(colNum, testData))
 	table.SetBorders(tablewriter.Border{Left: true, Top: false, Right: true, Bottom: false})
 	table.SetCenterSeparator("|")
 	for idx := 0; idx < rowNum; idx++ {
-		table.Append(placeholder)
+		table.Append(generateRow(colNum, testData))
 	}
 	table.Render()
 
 	return buf.String()
 }
 
-func main() {
-	// Init variable with default values
-	initDefaults()
+func generateRow(colNum int, testData bool) []string {
+	row := make([]string, colNum)
+	for index := range row {
+		if testData {
+			row[index] = namesgenerator.GetRandomName(0)
+		} else {
+			row[index] = " "
+		}
+	}
+	return row
+}
 
+func main() {
 	wf = aw.New()
 	wf.Run(run)
 }
