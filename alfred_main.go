@@ -7,7 +7,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/crispgm/alfred-markdown-table/pkg/namesgenerator"
+	"github.com/crispgm/alfred-markdown-table/internal/namesgenerator"
+
 	aw "github.com/deanishe/awgo"
 	"github.com/olekukonko/tablewriter"
 )
